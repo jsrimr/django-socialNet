@@ -3,9 +3,9 @@ from .models import Profile
 # Create your views here.
 
 def my_profile_view(request):
-    # obj = Profile.objects.get(user=request.user)
+    obj = Profile.objects.get(user=request.user)
 
-    obj = Profile.objects.first()
+    # obj = Profile.objects.first()
     context = {
         'obj' : obj
     }

@@ -7,6 +7,7 @@
 {% block content %}
 {{ obj }}<br/>
 
+<img src="{{ obj.avatar.url }}">
 <ul>
 {% for friend in obj.get_friends %}
 <li>{{ friend }}</li>

@@ -63,6 +63,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.media', # set this explicitly
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -124,6 +125,8 @@ STATIC_URL = '/static_project/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static_project"), # Root의 static 파일
 )
+
+SITE_URL = '127.0.0.1:8000'
 # mysite/settings.py
 # 각 media 파일에 대한 URL Prefix
 MEDIA_URL = '/media/' # 항상 / 로 끝나도록 설정
