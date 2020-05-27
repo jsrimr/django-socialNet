@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    my profile
+{% endblock title %}
+
+{% block content %}
+{{ obj }}<br/>
+
+<ul>
+{% for friend in obj.get_friends %}
+<li>{{ friend }}</li>
+{% endfor %}
+</ul>
+
+{{ obj.get_friends_count }}<br/>
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}

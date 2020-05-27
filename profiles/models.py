@@ -38,6 +38,12 @@ class Profile(models.Model):
 
         super().save(*args, **kwargs)
 
+    def get_friends(self):
+        return self.friends.all()
+
+    def get_friends_count(self):
+        return self.friends.all().count()
+
 STATUS_CHOICES = (
     ('send','send'),
     ('accepted','accepted')

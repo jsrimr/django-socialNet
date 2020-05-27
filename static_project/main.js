@@ -1,0 +1,1 @@
+$(document).ready(()=>{console.log("working from the base")})
