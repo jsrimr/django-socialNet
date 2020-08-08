@@ -44,6 +44,12 @@ class Profile(models.Model):
     def get_friends_count(self):
         return self.friends.all().count()
 
+    def get_post_no(self):
+        return self.posts.all().count()
+
+    def fet_all_authors_posts(self):
+        return self.posts.all()
+
 STATUS_CHOICES = (
     ('send','send'),
     ('accepted','accepted')
