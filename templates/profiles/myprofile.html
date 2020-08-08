@@ -90,6 +90,31 @@
                                 {% endfor %}
                             </td>
                         </tr>
+                        <tr>
+                            <td>n_posts</td>
+                            <td>
+                                {{ profile.get_post_no }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Likes I gave</td>
+                            <td>
+                                {{ profile.get_likes_given_no }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Likes I received</td>
+                            <td>
+                                {{ profile.get_likes_received }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>all posts</td>
+                            <td>
+                                {{ profile.fet_all_authors_posts }}
+                            </td>
+                        </tr>
+
                         </tbody>
                     </table>
                 </div>

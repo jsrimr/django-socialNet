@@ -1,7 +1,10 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 from django.template.defaultfilters import slugify
+
 from .utils import get_random_code
+
+
 # Create your models here.
 
 class Profile(models.Model):
@@ -50,10 +53,27 @@ class Profile(models.Model):
     def fet_all_authors_posts(self):
         return self.posts.all()
 
+    def get_likes_given_no(self):
+        likes = self.like_set.all()
+        total_liked = 0
+        for item in likes:
+            if item.value == 'Like':
+                total_liked += 1
+        return total_liked
+
+    def get_likes_received(self):
+        posts = self.posts.all()
+        total_liked = 0
+        for item in posts:
+            total_liked += item.liked.all().count()
+        return total_liked
+
 STATUS_CHOICES = (
-    ('send','send'),
-    ('accepted','accepted')
+    ('send', 'send'),
+    ('accepted', 'accepted')
 )
+
+
 class Relationship(models.Model):
     sender = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='sender')
     receiver = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='receiver')
