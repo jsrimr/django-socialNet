@@ -4,18 +4,29 @@
     my profile
 {% endblock title %}
 
+{#{% block content %}#}
+{#{{ profile }}<br/>#}
+{##}
+{#<img src="{{ profile.avatar.url }}">#}
+{#<ul>#}
+{#{% for friend in profile.get_friends %}#}
+{#<li>{{ friend }}</li>#}
+{#{% endfor %}#}
+{#</ul>#}
+{##}
+{#{{ profile.get_friends_count }}<br/>#}
+{#{% endblock content %}#}
+
 {% block content %}
-{{ obj }}<br/>
+    {% if confirm %}
+        <h1>Updated</h1>
+    {% endif %}
+    <form action="" method="POST" class="ui form" enctype="multipart/form-data"></form>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="ui positive button">update</button>
 
-<img src="{{ obj.avatar.url }}">
-<ul>
-{% for friend in obj.get_friends %}
-<li>{{ friend }}</li>
-{% endfor %}
-</ul>
-
-{{ obj.get_friends_count }}<br/>
-{% endblock content %}
+{% endblock %}
 
 {% block scripts %}
 
