@@ -14,7 +14,7 @@
                             {{ obj.content }}
                         </div>
                         <div class="content">
-                            <form action="" method="POST">
+                            <form action="{% url 'posts:like-post-view' %}" method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" name="post_id" value="{{ obj.id }}">
                                 <button class="ui primary button">Like</button>

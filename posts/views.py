@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from profiles.models import Profile
 from .models import Post, Like
@@ -36,3 +36,5 @@ def like_unlike_post(request):
 
         post_obj.save()
         like.save()
+
+    return redirect('posts:main-post-view')
