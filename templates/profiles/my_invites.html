@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    my invites
+{% endblock title %}
+
+
+{% block content %}
+    <ul>
+    {% for item in qs %}
+        <li>{{ item }}</li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock scripts %}

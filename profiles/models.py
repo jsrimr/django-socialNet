@@ -68,10 +68,17 @@ class Profile(models.Model):
             total_liked += item.liked.all().count()
         return total_liked
 
+
 STATUS_CHOICES = (
     ('send', 'send'),
     ('accepted', 'accepted')
 )
+
+
+class RelationshipManager(models.Manager):
+    def invitations_received(self, receiver):
+        qs = Relationship.objects.filter(receiver=receiver, status='send')
+        return qs
 
 
 class Relationship(models.Model):
@@ -81,6 +88,8 @@ class Relationship(models.Model):
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+
+    objects = RelationshipManager()
 
     def __str__(self):
         return f"{self.sender}-{self.receiver}-{self.status}"
