@@ -8,8 +8,8 @@
     <div class="ui grid">
         <div class="row">
             <div class="eleven wide column">
-                 {% for obj in qs %}
-                     <div class="ui fluid card">
+                {% for obj in qs %}
+                    <div class="ui fluid card">
                         <div class="content">
                             {{ obj.content }}
                         </div>
@@ -24,20 +24,38 @@
                                         <i class="thumbs down icon"></i>&nbsp;Unlike
                                     {% endif %}
                                 </button>
-                            &nbsp;{{ obj.num_likes }}
-{#                            obj.liked.all().count() 를 할 순 없다. 함수 명을 적어줘야 한다, 그래서 2개 연속으로 실행할 순 없으니 num_likesr같은 메소드를 만들어둔다 #}
-{#                            이 버튼에 어떻게 기능을 연결할까? -> form action!#}
+                                &nbsp;{{ obj.num_likes }}
+                                {#                            obj.liked.all().count() 를 할 순 없다. 함수 명을 적어줘야 한다, 그래서 2개 연속으로 실행할 순 없으니 num_likesr같은 메소드를 만들어둔다 #}
+                                {#                            이 버튼에 어떻게 기능을 연결할까? -> form action!#}
+                            </form>
+                            <div>
+                                {% for c in obj.comment_set.all %}
+                                    <p>{{ c.body }}</p>
+                                {% endfor %}
+                            </div>
+                            <form action="" method="POST" class="ui form">
+                                {% csrf_token %}
+                                <input type="hidden" name="post_id" value="{{ obj.id }}">
+                                {{ c_form }}
+                                <button type="submit" class="ui primary button" name="submit_c_form">comment</button>
                             </form>
                         </div>
-                     </div>
+                    </div>
                 {% endfor %}
             </div>
             <div class="five wide column">
-                Form
+                {% if p_form_submitted %}
+                    <div class="ui green message">
+                    Your post has been updated
+                    </div>
+                {% endif %}
+                <form action="" method="POST" class="ui form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ p_form.as_p }}
+                    <button type="submit" class="ui button positive" name="submit_p_form"> Send POST</button>
+                </form>
             </div>
+
         </div>
     </div>
-    {% for obj in qs %}
-        <p>{{ obj.content }}</p>
-    {% endfor %}
 {% endblock content %}
