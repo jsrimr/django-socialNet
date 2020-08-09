@@ -7,9 +7,11 @@ from .models import Post, Like
 # Create your views here.
 def post_comment_create_and_list_view(request):
     qs = Post.objects.all()
+    profile = Profile.objects.get(user=request.user)
 
     context = {
         'qs': qs,
+        'profile': profile,
     }
     return render(request, 'posts/main.html', context)
 
@@ -26,13 +28,16 @@ def like_unlike_post(request):
         else:
             post_obj.liked.add(profile)  # db 추가 메소드
 
-        like, created = Like.objects.get_or_create(user=profile, post_id=post_id) # get_or_create : 있으면 가져오고 없으면 더미 만들어서 가져온다
+        like, created = Like.objects.get_or_create(user=profile,
+                                                   post_id=post_id)  # get_or_create : 있으면 가져오고 없으면 더미 만들어서 가져온다
 
         if not created:
             if like.value == 'Like':
                 like.value = 'Unlike'
             else:
                 like.value = 'Like'
+        else:
+            like.value = 'Like'
 
         post_obj.save()
         like.save()
