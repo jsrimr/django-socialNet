@@ -23,9 +23,26 @@ def my_profile_view(request):
 
     return render(request, 'profiles/myprofile.html', context)
 
+
 def invites_received_view(request):
-    profile = Profile.objects.get(user = request.user)
+    profile = Profile.objects.get(user=request.user)
     qs = Relationship.objects.invitations_received(profile)
 
-    context = {'qs':qs}
+    context = {'qs': qs}
     return render(request, 'profiles/my_invites.html', context)
+
+
+def profiles_list_view(request):
+    user = request.user
+    qs = Profile.objects.get_all_profiles(user)
+
+    context = {'qs': qs}
+    return render(request, 'profiles/profile_list.html', context)
+
+
+def invite_profiles_list_view(request):
+    user = request.user
+    qs = Profile.objects.get_all_profiles_to_invite(user)
+
+    context = {'qs': qs}
+    return render(request, 'profiles/to_invite_list.html', context)
