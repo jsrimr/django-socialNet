@@ -12,6 +12,18 @@ body {
     margin-bottom: 7px !important;
 }
 
+.mb-5 {
+    margin-bottom: 5px !important;
+}
+
+.bwhite-lg {
+    background-color: transparent !important;
+    width : 10px !important;
+}
+
+.comment-box {
+    display: none;
+}
 .mt-5 {
     margin-bottom: 5px !important;
 }
