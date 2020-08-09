@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    posts
+{% endblock title %}
+
+{% block content %}
+    <div class="ui grid">
+        <div class="row">
+            <div class="eleven wide column">
+                 {% for obj in qs %}
+                     <div class="ui fluid card">
+                        <div class="content">
+                            {{ obj.content }}
+                        </div>
+                        <div class="content">
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="post_id" value="{{ obj.id }}">
+                                <button class="ui primary button">Like</button>
+{#                            이 버튼에 어떻게 기능을 연결할까? -> form action!#}
+                            </form>
+                        </div>
+                     </div>
+                {% endfor %}
+            </div>
+            <div class="five wide column">
+                Form
+            </div>
+        </div>
+    </div>
+    {% for obj in qs %}
+        <p>{{ obj.content }}</p>
+    {% endfor %}
+{% endblock content %}
